@@ -8,6 +8,7 @@ const gql = arGql("https://ar-io.dev/graphql");
   let weeks = {};
 
   const getWeekNum = (time) => {
+    console.log(time)
     const start = new Date(time.getFullYear(), 0, 1);
 
     const days = Math.floor((time - start) / (24 * 60 * 60 * 1000));
@@ -52,7 +53,7 @@ const gql = arGql("https://ar-io.dev/graphql");
       if (weekNumber === 0) {
         time.setDate(time.getDate() - 7);
         
-        weekNumber = getWeekNum(time.getTime()) + 1;
+        weekNumber = getWeekNum(time) + 1;
       }
         
       if (!weeks[time.getFullYear() + "-" + weekNumber]) {
