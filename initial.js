@@ -17,12 +17,12 @@ const gql = arGql("https://ar-io.dev/graphql");
   }
 
   const loop = async (cursor) => {
-    const res = await gql.run(`query {
+    const res = await gql.run(`query($cursor: String) {
       transactions(
         tags: [{ name: "Signing-Client", values: "ArConnect" }]
         sort: HEIGHT_ASC
         first: 100
-        ${cursor ? ("after: " + cursor) : ""}
+        after: $cursor
       ) {
         edges {
           node {
@@ -39,7 +39,7 @@ const gql = arGql("https://ar-io.dev/graphql");
           hasNextPage
         }
       }
-    }`);
+    }`, { cursor });
 
     for (const { node } of res.data.transactions.edges) {
       if (Object.values(weeks).find(val => val.includes(node.owner.address))) {
