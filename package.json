@@ -1,0 +1,11 @@
+{
+  "name": "arconnect-tx-counter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/martonlederer/arconnect-tx-counter",
+  "author": "Marton Lederer <marton@lederer.hu>",
+  "license": "MIT",
+  "dependencies": {
+    "ar-gql": "^1.2.1"
+  }
+}
