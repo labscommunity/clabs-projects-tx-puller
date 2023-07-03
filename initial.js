@@ -42,7 +42,7 @@ const gql = arGql("https://ar-io.dev/graphql");
     }`, { cursor });
 
     for (const { node } of res.data.transactions.edges) {
-      if (Object.values(weeks).find(val => val.includes(node.owner.address))) {
+      if (weeks.find((w) => w.addresses.includes(node.owner.address))) {
         continue;
       }
 
