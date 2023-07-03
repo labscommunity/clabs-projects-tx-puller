@@ -5,7 +5,7 @@ const { join } = require("path");
 const gql = arGql("https://ar-io.dev/graphql");
 
 (async () => {
-  let weeks = {};
+  let weeks = [];
 
   const getWeekNum = (time) => {
     const start = new Date(time.getFullYear(), 0, 1);
@@ -54,11 +54,17 @@ const gql = arGql("https://ar-io.dev/graphql");
         
         weekNumber = getWeekNum(time) + 1;
       }
+
+      const weekInArray = weeks.find((w) => w.week === time.getFullYear() + "-" + weekNumber);
         
-      if (!weeks[time.getFullYear() + "-" + weekNumber]) {
-        weeks[time.getFullYear() + "-" + weekNumber] = [node.owner.address];
+      if (!weekInArray) {
+        weeks.push({
+          week: time.getFullYear() + "-" + weekNumber,
+          count: 0,
+          addresses: [node.owner.address]
+        });
       } else {
-        weeks[time.getFullYear() + "-" + weekNumber].push(node.owner.address);
+        weekInArray.addresses.push(node.owner.address);
       }
     }
 
@@ -68,6 +74,14 @@ const gql = arGql("https://ar-io.dev/graphql");
   };
 
   await loop();
+
+  for (let i = 0; i < weeks.length; i++) {
+    if (i === 0) {
+      weeks[i].count = weeks[i].addresses.length;
+    } else {
+      weeks[i].count += weeks[i - 1].count + weeks[i].addresses.length;
+    }
+  }
 
   writeFileSync(join(__dirname, "data.json"), new TextEncoder().encode(JSON.stringify(weeks, null, 2)));
 })();
