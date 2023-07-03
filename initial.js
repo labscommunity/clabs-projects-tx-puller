@@ -1,4 +1,7 @@
 const { arGql } = require("ar-gql");
+const { writeFileSync, fstat, write, writeFile } = require("fs");
+const { join } = require("path");
+
 const gql = arGql("https://ar-io.dev/graphql");
 
 (async () => {
@@ -19,6 +22,7 @@ const gql = arGql("https://ar-io.dev/graphql");
         tags: [{ name: "Signing-Client", values: "ArConnect" }]
         sort: HEIGHT_ASC
         first: 100
+        ${cursor ? ("after: " + cursor) : ""}
       ) {
         edges {
           node {
@@ -65,5 +69,5 @@ const gql = arGql("https://ar-io.dev/graphql");
 
   await loop();
 
-  console.log(JSON.stringify(weeks, null, 2));
+  writeFileSync(join(__dirname, "data.json"), new TextEncoder().encode(JSON.stringify(weeks, null, 2)));
 })();
