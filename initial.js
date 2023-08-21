@@ -2,7 +2,7 @@ const { arGql } = require("ar-gql");
 const { writeFileSync, fstat, write, writeFile } = require("fs");
 const { join } = require("path");
 
-const gql = arGql("https://ar-io.dev/graphql");
+const gql = arGql("https://arweave-search.goldsky.com/graphql");
 
 (async () => {
   let weeks = [];
