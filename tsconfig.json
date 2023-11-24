@@ -23,6 +23,6 @@
     /* Type Checking */
     "strict": true
   },
-  "include": ["src/**/*.ts", "index.ts"],
+  "include": ["src/**/*.ts", "src/logic.ts"],
   "exclude": ["node_modules", "dist/", "tests/"]
 }
