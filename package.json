@@ -1,11 +1,36 @@
 {
-  "name": "arconnect-tx-counter",
+  "name": "clabs-projects-tx-puller",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "repository": "https://github.com/martonlederer/arconnect-tx-counter",
-  "author": "Marton Lederer <marton@lederer.hu>",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run prettier && npm run test",
+    "prettier": "prettier --write .",
+    "test": "jest tests/"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.ts"
+    ]
+  },
+  "keywords": [],
+  "author": "Marton Lederer <marton@lederer.hu>, Lorimer Jenkins <lorimerjenkins1@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "ar-gql": "^1.2.1"
+    "ar-gql": "^1.2.4",
+    "dotenv": "^16.3.1",
+    "json2csv": "^6.0.0-alpha.2",
+    "nodemailer": "^6.9.7",
+    "prettier": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.10",
+    "@types/json2csv": "^5.0.7",
+    "@types/node": "^20.10.0",
+    "@types/nodemailer": "^6.4.14",
+    "ts-jest": "^29.1.1"
   }
 }
